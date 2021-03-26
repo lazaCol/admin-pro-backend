@@ -5,18 +5,19 @@ require('dotenv').config();
 
 const app = express();
 
+//cors
 app.use(cors());
+
+//body parse
+app.use(express.json());
 
 //data base
 dbConnection();
 
 
 //Rutas
-app.get('/', (req, res) =>{
-    res.json({
-        msg: "Hello world"
-    })
-} );
+app.use('/api/usuarios', require('./routes/usuarios'))
+app.use('/api/login', require('./routes/auth'))
 
 
 app.listen(process.env.PORT, () =>{
