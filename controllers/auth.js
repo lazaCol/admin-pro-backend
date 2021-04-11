@@ -91,13 +91,16 @@ const googleSingnIn = async (req, res = response ) => {
 const renewToken = async ( req, res = response ) => {
 
     const uid = req.uid;
+
+    const usuario = await Usuario.findById(uid);
     //generar el token
     const token = await generarJWT(uid);
 
     res.json({
         ok: true,
         msg: "renew token",
-        uid
+        token,
+        usuario,
     });
 }
 
